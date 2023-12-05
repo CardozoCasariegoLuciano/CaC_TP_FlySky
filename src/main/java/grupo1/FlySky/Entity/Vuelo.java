@@ -42,7 +42,7 @@ public class Vuelo {
     private String aeropuertoDestino;
 
     @Column(name = "CUPOS_LIBRES")
-    private int cuposLibres;
+    private Integer cuposLibres;
 
     @Column(name = "FECHA_SALIDA")
     private LocalDateTime fechaSalida;
