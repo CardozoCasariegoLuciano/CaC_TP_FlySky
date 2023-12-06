@@ -1,19 +1,13 @@
 package grupo1.FlySky.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "CLIENTES")
-public class Cliente {
+@Table(name = "USUARIO")
+public class Usuario {
 
     @Id
     @Column(name = "ID")
@@ -35,4 +29,8 @@ public class Cliente {
 
     @Column(name = "TELEFONO")
     private String telefono;
+
+    @Column(name = "ROL")
+    @Enumerated(EnumType.STRING)
+    private String rol;
 }
