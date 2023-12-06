@@ -1,6 +1,6 @@
 package grupo1.FlySky.Controller;
 
-import grupo1.FlySky.Dto.VuelosDTO;
+import grupo1.FlySky.Dto.request.VuelosDTO;
 import grupo1.FlySky.Service.interfaces.ICompraService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

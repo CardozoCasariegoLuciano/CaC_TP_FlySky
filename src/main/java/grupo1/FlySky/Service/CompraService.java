@@ -1,8 +1,8 @@
 package grupo1.FlySky.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import grupo1.FlySky.Dto.ResponseDTO;
-import grupo1.FlySky.Dto.VuelosDTO;
+import grupo1.FlySky.Dto.response.ResponseDTO;
+import grupo1.FlySky.Dto.request.VuelosDTO;
 import grupo1.FlySky.Entity.Vuelo;
 import grupo1.FlySky.Repository.IVueloRepository;
 import grupo1.FlySky.Service.interfaces.ICompraService;

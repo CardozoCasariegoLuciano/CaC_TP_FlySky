@@ -1,7 +1,7 @@
 package grupo1.FlySky.Service.interfaces;
 
-import grupo1.FlySky.Dto.ResponseDTO;
-import grupo1.FlySky.Dto.VuelosDTO;
+import grupo1.FlySky.Dto.response.ResponseDTO;
+import grupo1.FlySky.Dto.request.VuelosDTO;
 
 import java.util.List;
 

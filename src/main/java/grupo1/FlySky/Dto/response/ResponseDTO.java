@@ -1,4 +1,4 @@
-package grupo1.FlySky.Dto;
+package grupo1.FlySky.Dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

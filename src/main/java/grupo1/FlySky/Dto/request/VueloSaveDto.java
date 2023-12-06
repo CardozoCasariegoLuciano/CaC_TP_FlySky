@@ -1,4 +1,4 @@
-package grupo1.FlySky.Dto;
+package grupo1.FlySky.Dto.request;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VuelosDTO {
+public class VueloSaveDto {
 
     private Long id;
     private String aerolinea;
@@ -20,6 +20,6 @@ public class VuelosDTO {
     private String aeropuertoOrigen;
     private String aeropuertoDestino;
     private int cuposLibres;
-    /*private LocalDateTime fechaSalida;
-    private LocalDateTime fechaLlegada;*/
+    private LocalDateTime fechaSalida;
+    private LocalDateTime fechaLlegada;
 }
