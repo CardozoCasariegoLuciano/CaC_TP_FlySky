@@ -1,13 +1,13 @@
 package grupo1.FlySky.Service.interfaces;
 
 import grupo1.FlySky.Dto.response.ResponseDTO;
-import grupo1.FlySky.Dto.request.VuelosDTO;
+import grupo1.FlySky.Dto.request.VueloSaveDto;
 
 import java.util.List;
 
 public interface ICompraService {
 
-    List<VuelosDTO> fullVuelos();
+    List<VueloSaveDto> fullVuelos();
 
-    ResponseDTO guardarVuelo(VuelosDTO vuelosDTO);
+    ResponseDTO guardarVuelo(VueloSaveDto vuelosDTO);
 }

@@ -31,6 +31,6 @@ public class Usuario {
     private String telefono;
 
     @Column(name = "ROL")
-    @Enumerated(EnumType.STRING)
+   // @Enumerated(EnumType.STRING)
     private String rol;
 }

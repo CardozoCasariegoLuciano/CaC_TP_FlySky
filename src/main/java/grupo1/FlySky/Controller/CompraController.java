@@ -1,6 +1,6 @@
 package grupo1.FlySky.Controller;
 
-import grupo1.FlySky.Dto.request.VuelosDTO;
+import grupo1.FlySky.Dto.request.VueloSaveDto;
 import grupo1.FlySky.Service.interfaces.ICompraService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class CompraController {
     }
 
     @PostMapping("/guardarVuelos")
-    public ResponseEntity<?> guardarVuelo(@RequestBody VuelosDTO vuelosDTO) {
+    public ResponseEntity<?> guardarVuelo(@RequestBody VueloSaveDto vuelosDTO) {
         return new ResponseEntity<>(service.guardarVuelo(vuelosDTO), HttpStatus.OK);
     }
 

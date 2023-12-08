@@ -1,4 +1,4 @@
-package grupo1.FlySky.Repository;
+package grupo1.FlySky.Repository.interfaces;
 
 
 

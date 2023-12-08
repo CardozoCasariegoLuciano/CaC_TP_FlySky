@@ -2,9 +2,9 @@ package grupo1.FlySky.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import grupo1.FlySky.Dto.response.ResponseDTO;
-import grupo1.FlySky.Dto.request.VuelosDTO;
+import grupo1.FlySky.Dto.request.VueloSaveDto;
 import grupo1.FlySky.Entity.Vuelo;
-import grupo1.FlySky.Repository.IVueloRepository;
+import grupo1.FlySky.Repository.interfaces.IVueloRepository;
 import grupo1.FlySky.Service.interfaces.ICompraService;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +20,15 @@ public class CompraService implements ICompraService {
     }
 
     @Override
-    public List<VuelosDTO> fullVuelos() {
+    public List<VueloSaveDto> fullVuelos() {
         ObjectMapper mapper = new ObjectMapper();
         return repository.fullVuelos().stream()
-                .map(vuelo -> mapper.convertValue(vuelo, VuelosDTO.class))
+                .map(vuelo -> mapper.convertValue(vuelo, VueloSaveDto.class))
                 .toList();
     }
 
     @Override
-    public ResponseDTO guardarVuelo(VuelosDTO vuelosDTO) {
+    public ResponseDTO guardarVuelo(VueloSaveDto vuelosDTO) {
         ObjectMapper mapper = new ObjectMapper();
         Vuelo vueloEntity = mapper.convertValue(vuelosDTO, Vuelo.class);
         Vuelo resultado = repository.guardarVuelo(vueloEntity);

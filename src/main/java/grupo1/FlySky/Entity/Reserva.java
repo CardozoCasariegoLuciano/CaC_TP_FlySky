@@ -24,10 +24,8 @@ public class Reserva {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_RESERVA")
+    @JoinColumn(name = "ID_RESERVA") //no seria clienteID??
     private Reserva reservaId;
-
-    private C
 
     @Column(name = "PRECIO_FINAL")
     private Double precioFinal;

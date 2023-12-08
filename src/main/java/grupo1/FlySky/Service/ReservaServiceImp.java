@@ -6,10 +6,11 @@ import grupo1.FlySky.Dto.response.ResponseDTO;
 import grupo1.FlySky.Entity.Reserva;
 import grupo1.FlySky.Repository.ReservaRepositoryImp;
 import grupo1.FlySky.Service.interfaces.IReservaService;
+import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 
+@Service
 public class ReservaServiceImp implements IReservaService {
     private ReservaRepositoryImp repository;
     private final ObjectMapper mapper;
@@ -22,16 +23,28 @@ public class ReservaServiceImp implements IReservaService {
     @Override
     public ResponseDTO nuevaReserva(ReservaSaveDto reserva) {
         Reserva reservaEntity = mapper.convertValue(reserva, Reserva.class);
-        if(verificarExistencia(reservaEntity))
-            throw new CloneException("La reserva ya existe");
-        Reserva respuestaRepo = repository.save(reservaEntity);
-        if(respuestaRepo == null)
-            throw new InsertDBException("Falla durante la insercion");
+        //if(verificarExistencia(reservaEntity)){
+            //throw new CloneException("La reserva ya existe");
+        // }
+        Reserva respuestaRepo = repository.guardar(reservaEntity);
+       // if(respuestaRepo == null){
+            //throw new InsertDBException("Falla durante la insercion");
+        // }
         return new ResponseDTO("La reserva "+respuestaRepo.getReservaId()+" se guardo correctamente.");
     }
 
+    @Override
+    public List<ReservaSaveDto> devolverTodos() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.findAndRegisterModules();
+        return repository.devuelveTodos().stream()
+                .map(auto -> new ReservaSaveDto())
+                .toList();
+    }
+
+
     private boolean verificarExistencia(Reserva r){
-        List<Reserva> listaEntidad = respository.findAll();
+        List<Reserva> listaEntidad = repository.devuelveTodos();
         if(listaEntidad.isEmpty())
             return false;
         List<Reserva> listaBusqueda =listaEntidad.stream()
