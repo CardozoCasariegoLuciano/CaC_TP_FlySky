@@ -5,9 +5,11 @@ import grupo1.FlySky.Dto.VuelosDTO;
 
 import java.util.List;
 
-public interface ICompraService {
+public interface IVueloService {
 
     List<VuelosDTO> fullVuelos();
 
-    ResponseDTO guardarVuelo(VuelosDTO vuelosDTO);
+     ResponseDTO guardarVuelo(VuelosDTO vuelosDTO);
+
+     VuelosDTO buscarPorDestino(Long id);
 }
