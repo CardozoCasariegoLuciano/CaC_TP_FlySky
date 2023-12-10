@@ -1,5 +1,6 @@
 package grupo1.FlySky.Dto.Responses;
 
+import grupo1.FlySky.Entity.Roles;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,5 @@ public class UsuarioDto {
     private LocalDate fechaNac;
     private String email;
     private String telefono;
-    private String rol;
+    private Roles.Rol rol;
 }
