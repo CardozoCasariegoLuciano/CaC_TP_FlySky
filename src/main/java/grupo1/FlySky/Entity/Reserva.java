@@ -10,11 +10,15 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name = "Reserva")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reserva {
 
     @Id
@@ -24,8 +28,14 @@ public class Reserva {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_RESERVA") //no seria clienteID??
-    private Reserva reservaId;
+    @JoinColumn(name = "VUELO_ID")
+    private Vuelo vueloID;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLIENTE_ID")
+    private Usuario clienteID;
+
+    //private LocalDate fecha;
 
     @Column(name = "PRECIO_FINAL")
     private Double precioFinal;
@@ -35,5 +45,6 @@ public class Reserva {
 
     @Column(name = "METODO_PAGO")
     private String metodoPago;
+
 
 }

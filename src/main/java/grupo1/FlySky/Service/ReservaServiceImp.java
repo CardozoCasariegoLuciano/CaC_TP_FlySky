@@ -1,57 +1,57 @@
 package grupo1.FlySky.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import grupo1.FlySky.Dto.request.ReservaSaveDto;
-import grupo1.FlySky.Dto.response.ResponseDTO;
+import grupo1.FlySky.Dto.response.ReservaDto;
 import grupo1.FlySky.Entity.Reserva;
-import grupo1.FlySky.Repository.ReservaRepositoryImp;
+import grupo1.FlySky.Exceptions.DuplicateReservaException;
+import grupo1.FlySky.Repository.interfaces.IReservaRepository;
 import grupo1.FlySky.Service.interfaces.IReservaService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaServiceImp implements IReservaService {
-    private ReservaRepositoryImp repository;
-    private final ObjectMapper mapper;
+    private IReservaRepository repository;
+    private ModelMapper mapper = new ModelMapper();
 
-    public ReservaServiceImp(ReservaRepositoryImp repository){
+    public ReservaServiceImp(IReservaRepository repository){
         this.repository = repository;
-        mapper = new ObjectMapper();
     }
 
     @Override
-    public ResponseDTO nuevaReserva(ReservaSaveDto reserva) {
-        Reserva reservaEntity = mapper.convertValue(reserva, Reserva.class);
-        //if(verificarExistencia(reservaEntity)){
-            //throw new CloneException("La reserva ya existe");
-        // }
-        Reserva respuestaRepo = repository.guardar(reservaEntity);
-       // if(respuestaRepo == null){
-            //throw new InsertDBException("Falla durante la insercion");
-        // }
-        return new ResponseDTO("La reserva "+respuestaRepo.getReservaId()+" se guardo correctamente.");
+    public ReservaDto nuevaReserva(ReservaSaveDto reserva) {
+        VueloServiceImp vueloService = new VueloServiceImp();
+        Optional<Reserva> findedReserva = this.repository.findReservaById(reserva.getId());
+        if(!findedReserva.isEmpty()){
+            throw new DuplicateReservaException("Reserva ya registrada");
+        }
+        //if(!vueloService.findVueloById(reserva.getVueloID).getAsientosLibres > reserva.getCantAsientos()){
+        //     throw new AsientosExcedidosException("No se puede reservas mas asientos que los que hay disponibles");
+        //}
+
+       // reserva.setPrecioFinal(vueloService.findVueloById(reserva.getVueloID())
+       //         .getPrecio*reserva.getCantAsientos()); //seteo el precio buscando en vuelo
+        Reserva reservaEntity = this.mapper.map(reserva, Reserva.class);
+
+        Reserva reservaCreada = this.repository.save(reservaEntity);
+
+        //
+        // le saco asientos libres al vuelo
+        return this.mapper.map(reservaCreada, ReservaDto.class);
+
+        //
     }
 
     @Override
-    public List<ReservaSaveDto> devolverTodos() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        return repository.devuelveTodos().stream()
-                .map(auto -> new ReservaSaveDto())
-                .toList();
-    }
+    public List<ReservaDto> devolverTodos() {
+        List<Reserva> reservas = this.repository.findAll();
 
-
-    private boolean verificarExistencia(Reserva r){
-        List<Reserva> listaEntidad = repository.devuelveTodos();
-        if(listaEntidad.isEmpty())
-            return false;
-        List<Reserva> listaBusqueda =listaEntidad.stream()
-                .filter(reserva -> reserva.equals(r))
-                .toList();
-
-        return !listaBusqueda.isEmpty();
-
+        return reservas.stream()
+                .map(reserva -> this.mapper.map(reserva, ReservaDto.class))
+                .collect(Collectors.toList());
     }
 }

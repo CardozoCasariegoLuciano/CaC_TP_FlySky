@@ -6,12 +6,10 @@ import grupo1.FlySky.Service.interfaces.ICompraService;
 import grupo1.FlySky.Service.interfaces.IReservaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/reserve")
 public class ReservaController {
 
     private IReservaService service;
@@ -20,12 +18,14 @@ public class ReservaController {
         this.service = service;
     }
 
-    @PostMapping("/reserve/new")
+    @GetMapping("/all")
+    public ResponseEntity<?> devolverTodos() {
+        return new ResponseEntity<>(service.devolverTodos(), HttpStatus.OK);
+    }
+
+    @PostMapping("/new")
     public ResponseEntity<?> nuevaReserva(@RequestBody ReservaSaveDto reserva) {
         return new ResponseEntity<>(service.nuevaReserva(reserva), HttpStatus.OK);
     }
-    @GetMapping("/reserve/all")
-    public ResponseEntity<?> nuevaReserva() {
-        return new ResponseEntity<>(service.devolverTodos(), HttpStatus.OK);
-    }
+
 }
