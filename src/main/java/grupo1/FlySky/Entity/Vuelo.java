@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -42,8 +42,8 @@ public class Vuelo {
     private Integer cuposLibres;
 
     @Column(name = "FECHA_SALIDA")
-    private LocalDateTime fechaSalida;
+    private LocalDate fechaSalida;
 
     @Column(name = "FECHA_LLEGADA")
-    private LocalDateTime fechaLlegada;
+    private LocalDate fechaLlegada;
 }

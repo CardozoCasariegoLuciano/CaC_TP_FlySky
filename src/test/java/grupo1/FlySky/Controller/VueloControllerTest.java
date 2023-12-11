@@ -1,9 +1,10 @@
 package grupo1.FlySky.Controller;
 
 
+
 import grupo1.FlySky.Dto.VuelosDTO;
 import grupo1.FlySky.Service.VueloService;
-import org.hibernate.mapping.Array;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +35,8 @@ import static org.mockito.Mockito.when;
     @Mock
     private VueloService vueloService;
 
-
+    @Mock
+    private LocalDate localDate;
     @InjectMocks
     private VueloController vueloController;
 
@@ -43,7 +45,7 @@ import static org.mockito.Mockito.when;
      void guardarVuelo_ok() {
 
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2);
+                "CBA", "BEA", 2,localDate, localDate);
 
 
         ResponseEntity<?> responseEntity = vueloController.guardarVuelo(vuelosDTO);
@@ -68,7 +70,7 @@ import static org.mockito.Mockito.when;
     @Test
     void buscarPorDestino_ok() {
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2);
+                "CBA", "BEA", 2,localDate,localDate);
 
         when(vueloService.buscarPorDestino(1L)).thenReturn(vuelosDTO);
 
@@ -108,8 +110,8 @@ import static org.mockito.Mockito.when;
     @Test
     void fullVuelos_ok() {
         List<VuelosDTO> vuelosDTOS = Arrays.asList(
-                new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2),
-                new VuelosDTO(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1)
+                new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2,localDate,localDate),
+                new VuelosDTO(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,localDate,localDate)
         );
 
         when(vueloService.fullVuelos()).thenReturn(vuelosDTOS);
