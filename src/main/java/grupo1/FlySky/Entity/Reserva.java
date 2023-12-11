@@ -11,6 +11,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @Table(name = "RESERVA")
@@ -22,8 +25,8 @@ public class Reserva {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ID_CLIENTE")
-    private Cliente clienteId;
+    @JoinColumn(name = "ID_USUARIO")
+    private Usuario usuarioId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_VUELO")
@@ -32,5 +35,12 @@ public class Reserva {
     @Column(name = "CANTIDAD_ASIENTOS")
     private Integer cantidadAsientos;
 
+    @Column(name = "PRECIO_FINAL")
+    private Double precioFinal;
 
+    @Column(name = "METODO_PAGO")
+    private String metodoPago;
+
+    @Column(name = "FECHA")
+    private LocalDate fecha;
 }
