@@ -58,15 +58,8 @@ public class UserServiceTest {
 
     @Test
     void crearUsuario_EmailTaken_Test() {
-        try {
-            CrearUsuarioDto usuario = new CrearUsuarioDto("Usuario", "Perez", LocalDate.of(1990, 5, 15), "test@gmail.com", "42505500");
-            when(repository.findUserByEmail(any())).thenReturn(Optional.of(new Usuario()));
-
-            service.crearUsuario(usuario);
-            fail("Se esperaba DuplicateUserException pero no se lanzó.");
-        } catch (DuplicateUserException e) {
-            assertNotNull(e.getMessage());
-            assertTrue(e instanceof DuplicateUserException);
-        }
+        CrearUsuarioDto usuario = new CrearUsuarioDto("Usuario", "Perez", LocalDate.of(1990, 5, 15), "test@gmail.com", "42505500");
+        when(repository.findUserByEmail(any())).thenReturn(Optional.of(new Usuario()));
+        assertThrows(DuplicateUserException.class, () -> service.crearUsuario(usuario));
     }
 }
