@@ -1,12 +1,17 @@
 package grupo1.FlySky.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 @Entity
 @Data
 @Table(name = "USUARIO")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Id
@@ -31,6 +36,6 @@ public class Usuario {
     private String telefono;
 
     @Column(name = "ROL")
-   // @Enumerated(EnumType.STRING)
-    private String rol;
+    @Enumerated(EnumType.STRING)
+    private Roles.Rol rol;
 }
