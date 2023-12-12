@@ -15,5 +15,5 @@ public class ReservaDto {
     //private LocalDate fecha;
     private int cantAsientos;
     private String metodoPago;
-    private float precioFinal;
+    private Double precioFinal;
 }

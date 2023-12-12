@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,6 +14,6 @@ public class ReservaSaveDto {
     //private LocalDate fecha;
     private int cantAsientos;
     private String metodoPago;
-    private float precioFinal;
+    private double precioFinal;
 
 }

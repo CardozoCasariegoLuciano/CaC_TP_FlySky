@@ -2,7 +2,6 @@ package grupo1.FlySky.Controller;
 
 import grupo1.FlySky.Dto.request.ReservaSaveDto;
 import grupo1.FlySky.Service.ReservaServiceImp;
-import grupo1.FlySky.Service.interfaces.ICompraService;
 import grupo1.FlySky.Service.interfaces.IReservaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +24,7 @@ public class ReservaController {
 
     @PostMapping("/new")
     public ResponseEntity<?> nuevaReserva(@RequestBody ReservaSaveDto reserva) {
-        return new ResponseEntity<>(service.nuevaReserva(reserva), HttpStatus.OK);
+        return new ResponseEntity<>(service.nuevaReserva(reserva), HttpStatus.CREATED);
     }
 
 }
