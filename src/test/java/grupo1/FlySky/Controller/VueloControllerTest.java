@@ -35,8 +35,7 @@ import static org.mockito.Mockito.when;
     @Mock
     private VueloService vueloService;
 
-    @Mock
-    private LocalDate localDate;
+
     @InjectMocks
     private VueloController vueloController;
 
@@ -45,7 +44,7 @@ import static org.mockito.Mockito.when;
      void guardarVuelo_ok() {
 
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2,localDate, localDate);
+                "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12));
 
 
         ResponseEntity<?> responseEntity = vueloController.guardarVuelo(vuelosDTO);
@@ -70,7 +69,7 @@ import static org.mockito.Mockito.when;
     @Test
     void buscarPorDestino_ok() {
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2,localDate,localDate);
+                "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12));
 
         when(vueloService.buscarPorDestino(1L)).thenReturn(vuelosDTO);
 
@@ -110,8 +109,8 @@ import static org.mockito.Mockito.when;
     @Test
     void fullVuelos_ok() {
         List<VuelosDTO> vuelosDTOS = Arrays.asList(
-                new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2,localDate,localDate),
-                new VuelosDTO(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,localDate,localDate)
+                new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12)),
+                new VuelosDTO(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,LocalDate.of(2023,12,11),LocalDate.of(2023,12,14))
         );
 
         when(vueloService.fullVuelos()).thenReturn(vuelosDTOS);
