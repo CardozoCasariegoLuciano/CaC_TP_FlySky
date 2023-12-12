@@ -42,8 +42,6 @@ public class ReservaServiceImp implements IReservaService {
         //
         // le saco asientos libres al vuelo
         return this.mapper.map(reservaCreada, ReservaDto.class);
-
-        //
     }
 
     @Override
@@ -54,4 +52,13 @@ public class ReservaServiceImp implements IReservaService {
                 .map(reserva -> this.mapper.map(reserva, ReservaDto.class))
                 .collect(Collectors.toList());
     }
+
+    public List<ReservaDto> reservasPorUsuario (Long id_usuario){
+        Optional<Reserva> reservas = this.repository.findReservaByClienteID(id_usuario);
+
+        return reservas.stream()
+                .map(reserva -> this.mapper.map(reserva, ReservaDto.class))
+                .collect(Collectors.toList());
+    }
+
 }
