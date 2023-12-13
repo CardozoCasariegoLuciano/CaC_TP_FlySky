@@ -5,22 +5,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "VUELO")
 public class Vuelo {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "vueloSeq")
-    @SequenceGenerator(sequenceName = "vueloSeq", allocationSize = 1, name = "vueloSeq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "AEROLINEA")
@@ -45,8 +46,8 @@ public class Vuelo {
     private Integer cuposLibres;
 
     @Column(name = "FECHA_SALIDA")
-    private LocalDateTime fechaSalida;
+    private LocalDate fechaSalida;
 
     @Column(name = "FECHA_LLEGADA")
-    private LocalDateTime fechaLlegada;
+    private LocalDate fechaLlegada;
 }

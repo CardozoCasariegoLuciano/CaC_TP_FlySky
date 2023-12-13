@@ -1,12 +1,12 @@
-package grupo1.FlySky.Dto;
+package grupo1.FlySky.Dto.Responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
+@Data
 @NoArgsConstructor
 public class ResponseDTO {
-    private String message;
+    private String mensaje;
 }
