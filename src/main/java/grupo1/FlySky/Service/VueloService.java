@@ -58,4 +58,15 @@ public class VueloService implements IVueloService {
 
         return respuesta;
     }
+
+    @Override
+    public void modificarAsientos(Long id, int cantAsientos){
+        ModelMapper modelMapper = new ModelMapper();
+
+        Optional<Vuelo> vuelo = this.repository.findById(id);
+        Vuelo vueloEntity = modelMapper.map(vuelo, Vuelo.class);
+
+        vueloEntity.setCuposLibres(vueloEntity.getCuposLibres()-cantAsientos);
+        this.repository.save(vueloEntity);
+    }
 }

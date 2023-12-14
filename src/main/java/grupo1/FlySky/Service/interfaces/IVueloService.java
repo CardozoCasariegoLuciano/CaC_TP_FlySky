@@ -10,7 +10,9 @@ public interface IVueloService {
 
     List<VuelosDTO> fullVuelos();
 
-     ResponseDTO guardarVuelo(VuelosDTO vuelosDTO);
+    ResponseDTO guardarVuelo(VuelosDTO vuelosDTO);
 
-     VuelosDTO buscarPorDestino(Long id);
+    VuelosDTO buscarPorDestino(Long id);
+
+    void modificarAsientos(Long id, int cantAsientos);
 }
