@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/reserve")
 public class ReservaController {
 
-    private IReservaService service;
+    private final IReservaService service;
 
     public ReservaController(ReservaServiceImp service) {
         this.service = service;
