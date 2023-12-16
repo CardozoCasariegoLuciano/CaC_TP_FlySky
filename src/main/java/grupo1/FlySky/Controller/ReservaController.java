@@ -23,6 +23,11 @@ public class ReservaController {
         return new ResponseEntity<>(service.devolverTodos(), HttpStatus.OK);
     }
 
+    @GetMapping("/all/{userId}")
+    public ResponseEntity<?> reservasPorUsuario(@PathVariable Long userId) {
+        return new ResponseEntity<>(service.reservasPorUsuario(userId), HttpStatus.OK);
+    }
+
     @PostMapping("/new")
     public ResponseEntity<?> nuevaReserva(@RequestBody @Valid ReservaSaveDto reserva) {
         return new ResponseEntity<>(service.nuevaReserva(reserva), HttpStatus.CREATED);

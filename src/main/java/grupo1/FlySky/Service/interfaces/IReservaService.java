@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface IReservaService {
     ReservaDto nuevaReserva(ReservaSaveDto reserva);
+
     List<ReservaDto> devolverTodos();
+
+    List<ReservaDto> reservasPorUsuario(Long id_usuario);
 }

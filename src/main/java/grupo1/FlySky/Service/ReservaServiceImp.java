@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -71,5 +72,11 @@ public class ReservaServiceImp implements IReservaService {
                 .map(reserva -> this.mapper.map(reserva, ReservaDto.class))
                 .collect(Collectors.toList());
     }
+    public List<ReservaDto> reservaPorFecha (LocalDate fecha) {
+        List<Reserva> reservas = this.repository.findByFecha(fecha);
 
+        return reservas.stream()
+                .map(reserva -> this.mapper.map(reserva, ReservaDto.class))
+                .collect(Collectors.toList());
+    }
 }
