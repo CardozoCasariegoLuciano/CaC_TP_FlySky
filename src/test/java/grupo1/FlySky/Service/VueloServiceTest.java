@@ -4,7 +4,7 @@ package grupo1.FlySky.Service;
 import grupo1.FlySky.Dto.Responses.ResponseDTO;
 import grupo1.FlySky.Dto.VuelosDTO;
 import grupo1.FlySky.Entity.Vuelo;
-import grupo1.FlySky.Repository.IVueloRepository;
+import grupo1.FlySky.Repository.interfaces.IVueloRepository;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,8 +34,8 @@ public class VueloServiceTest {
     @Test
     @Description("Devuelve lista de vuelos")
     void fullVuelos_ok() {
-        Vuelo vuelo1 = new Vuelo(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12));
-        Vuelo vuelo2 = new Vuelo(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,LocalDate.of(2023,12,11),LocalDate.of(2023,12,14));
+        Vuelo vuelo1 = new Vuelo((long)1, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2, LocalDateTime.of(2023,12,11,15,30),LocalDateTime.of(2023,12,12,8,00));
+        Vuelo vuelo2 = new Vuelo((long) 2, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,LocalDateTime.of(2023,12,11,9,50),LocalDateTime.of(2023,12,14,8,00));
 
         List<Vuelo> vuelosDTOS = List.of(vuelo1,vuelo2);
 
@@ -58,7 +60,7 @@ public class VueloServiceTest {
     @Description("Se pasan los parametros correctos")
     void guardarVuelo_ok() {
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2, LocalDate.of(2023,12,11),LocalDate.of(2023,12,12));
+                "CBA", "BEA", 2, LocalDateTime.of(2023,12,11,8,30),LocalDateTime.of(2023,12,12,8,0));
 
         when(repository.save(any(Vuelo.class))).thenReturn(new Vuelo());
 

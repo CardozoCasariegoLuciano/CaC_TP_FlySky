@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,7 +45,7 @@ import static org.mockito.Mockito.when;
      void guardarVuelo_ok() {
 
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12));
+                "CBA", "BEA", 2, LocalDateTime.of(2023,12,11,8,30),LocalDateTime.of(2023,12,12,8,8));
 
 
         ResponseEntity<?> responseEntity = vueloController.guardarVuelo(vuelosDTO);
@@ -69,7 +70,7 @@ import static org.mockito.Mockito.when;
     @Test
     void buscarPorDestino_ok() {
         VuelosDTO vuelosDTO = new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ",
-                "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12));
+                "CBA", "BEA", 2,LocalDateTime.of(2023,12,11,8,10),LocalDateTime.of(2023,12,12,8,10));
 
         when(vueloService.buscarPorDestino(1L)).thenReturn(vuelosDTO);
 
@@ -109,8 +110,8 @@ import static org.mockito.Mockito.when;
     @Test
     void fullVuelos_ok() {
         List<VuelosDTO> vuelosDTOS = Arrays.asList(
-                new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2,LocalDate.of(2023,12,11),LocalDate.of(2023,12,12)),
-                new VuelosDTO(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,LocalDate.of(2023,12,11),LocalDate.of(2023,12,14))
+                new VuelosDTO(1L, "Latam", 2000.0, "ARG", "BRZ", "CBA", "BEA", 2,LocalDateTime.of(2023,12,11,8,10),LocalDateTime.of(2023,12,12,8,10)),
+                new VuelosDTO(2L, "Aerolinea2", 2500.0, "USA", "CAN", "NYC", "TOR", 1,LocalDateTime.of(2023,12,11,8,10),LocalDateTime.of(2023,12,12,8,10))
         );
 
         when(vueloService.fullVuelos()).thenReturn(vuelosDTOS);
