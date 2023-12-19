@@ -1,6 +1,6 @@
 package grupo1.FlySky.Controller;
 
-import grupo1.FlySky.Dto.request.ReservaSaveDto;
+import grupo1.FlySky.Dto.Requests.ReservaSaveDto;
 import grupo1.FlySky.Service.ReservaServiceImp;
 import grupo1.FlySky.Service.interfaces.IReservaService;
 import jakarta.validation.Valid;

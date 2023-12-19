@@ -14,7 +14,6 @@ public class ExceptionsController {
     public ResponseEntity<?> DtoValidation(MethodArgumentNotValidException ex) {
         HashMap<String, String> errlist = new HashMap<>();
         ex.getFieldErrors().forEach(er -> errlist.put(er.getField(), er.getDefaultMessage()));
-
         return new ResponseEntity<>(errlist, HttpStatus.BAD_REQUEST);
     }
 
@@ -23,6 +22,27 @@ public class ExceptionsController {
         HashMap<String, String> errList = new HashMap<>();
         errList.put("Duplicated", ex.getMessage());
         return new ResponseEntity<>(errList, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(DuplicateReservaException.class)
+    public ResponseEntity<?> DuplicatedReserva(DuplicateReservaException ex){
+        HashMap<String, String> errList = new HashMap<>();
+        errList.put("Duplicated", ex.getMessage());
+        return new ResponseEntity<>(errList, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(AsientosExcedidosException.class)
+    public ResponseEntity<?> NotAvailableSeats(AsientosExcedidosException ex){
+        HashMap<String, String> errList = new HashMap<>();
+        errList.put("Not available seats", ex.getMessage());
+        return new ResponseEntity<>(errList, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(TipoDeUsuarioIncorrectoException.class)
+    public ResponseEntity<?> NotMeetsPrivilegies(TipoDeUsuarioIncorrectoException ex){
+        HashMap<String, String> errList = new HashMap<>();
+        errList.put("Not meeting priviligies", ex.getMessage());
+        return new ResponseEntity<>(errList, HttpStatus.UNAUTHORIZED);
     }
 
 }

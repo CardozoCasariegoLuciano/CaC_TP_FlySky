@@ -1,7 +1,7 @@
 package grupo1.FlySky.Service;
 
-import grupo1.FlySky.Dto.request.ReservaSaveDto;
-import grupo1.FlySky.Dto.response.ReservaDto;
+import grupo1.FlySky.Dto.Requests.ReservaSaveDto;
+import grupo1.FlySky.Dto.Responses.ReservaDto;
 import grupo1.FlySky.Entity.Reserva;
 import grupo1.FlySky.Entity.Usuario;
 import grupo1.FlySky.Exceptions.DuplicateReservaException;
@@ -32,16 +32,11 @@ public class ReservaServiceImp implements IReservaService {
     @Override
     public ReservaDto nuevaReserva(ReservaSaveDto reserva) {
 
-        //un paso es transformar la reserva a entidad... el tema es, completa vuelo?? No, no lo completa.
-
         Optional<Reserva> findedReserva = this.repository.findReservaById(reserva.getId());
         if(!findedReserva.isEmpty()){
             throw new DuplicateReservaException("Reserva ya registrada");
         }
 
-        //modificamos los asientos
-        //vueloService.modificarAsientos(reserva.getVueloID(), reserva.getCantAsientos());
-        //reservaEntity.getVueloID().setCuposLibres(reservaEntity.getVueloID().getCuposLibres() - reservaEntity.getCantAsientos());
         vueloService.modificarAsientos(reserva.getVueloID(), reserva.getCantAsientos());
 
         //seteamos precio final

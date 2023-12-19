@@ -1,4 +1,4 @@
-package grupo1.FlySky.Dto.response;
+package grupo1.FlySky.Dto.Requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,16 +6,16 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class ReservaDto {
-
+public class ReservaSaveDto {
     private Long id;
     private Long vueloID;
     private Long clienteID;
     private LocalDate fecha;
     private int cantAsientos;
     private String metodoPago;
-    private Float precioFinal;
+    private double precioFinal;
+
 }

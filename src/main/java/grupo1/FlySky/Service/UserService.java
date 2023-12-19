@@ -5,7 +5,8 @@ import grupo1.FlySky.Dto.Responses.UsuarioDto;
 import grupo1.FlySky.Entity.Roles;
 import grupo1.FlySky.Entity.Usuario;
 import grupo1.FlySky.Exceptions.DuplicateUserException;
-import grupo1.FlySky.Repository.IUserRepository;
+import grupo1.FlySky.Repository.interfaces.IUserRepository;
+import grupo1.FlySky.Service.interfaces.IUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

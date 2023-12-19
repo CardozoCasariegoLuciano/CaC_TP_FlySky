@@ -1,7 +1,7 @@
 package grupo1.FlySky.Controller;
 
 import grupo1.FlySky.Dto.Requests.CrearUsuarioDto;
-import grupo1.FlySky.Service.IUserService;
+import grupo1.FlySky.Service.interfaces.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

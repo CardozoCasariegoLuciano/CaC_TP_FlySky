@@ -1,7 +1,11 @@
 package grupo1.FlySky.Service;
 
 import grupo1.FlySky.Dto.EstadisticasDTO;
-import grupo1.FlySky.Dto.response.ReservaDto;
+import grupo1.FlySky.Dto.Responses.ReservaDto;
+import grupo1.FlySky.Dto.Responses.UsuarioDto;
+import grupo1.FlySky.Entity.Roles;
+import grupo1.FlySky.Exceptions.TipoDeUsuarioIncorrectoException;
+import grupo1.FlySky.Service.interfaces.IAdminService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Service
-public class AdminServiceImp implements IAdminService{
+public class AdminServiceImp implements IAdminService {
 
     private final ModelMapper mapper = new ModelMapper();
     private final VueloService vueloService;
@@ -21,12 +25,13 @@ public class AdminServiceImp implements IAdminService{
         this.reservaService = reservaService;
     }
     @Override
-    public EstadisticasDTO dailyStatus(LocalDate date) {
-        //procesamos las estadisticas para mostrar datos relevantes
+    public EstadisticasDTO dailyStatus(UsuarioDto usuario, LocalDate date) {
 
-        //cant asientos reservados
-        //reserva con mas asientos
-        //reserva mas cara
+        //aca deberiamos validar el usuario
+        if (!usuario.getRol().equals(Roles.Rol.ADMINISTRADOR)) {
+            throw new TipoDeUsuarioIncorrectoException("No tiene los privilegios suficientes");
+        }
+
         ArrayList<ReservaDto> reservas = (ArrayList<ReservaDto>) reservaService.reservaPorFecha(date);
         int cantAsientos = 0;
         float sumaDiaria = 0;
@@ -50,7 +55,6 @@ public class AdminServiceImp implements IAdminService{
             }
         }
 
-        //cantidad reservas
         int cantReservas = reservaService.reservaPorFecha(date).size();
 
         //vuelo mas reservado??

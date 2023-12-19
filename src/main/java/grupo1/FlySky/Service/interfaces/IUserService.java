@@ -1,4 +1,4 @@
-package grupo1.FlySky.Service;
+package grupo1.FlySky.Service.interfaces;
 
 import grupo1.FlySky.Dto.Requests.CrearUsuarioDto;
 import grupo1.FlySky.Dto.Responses.UsuarioDto;

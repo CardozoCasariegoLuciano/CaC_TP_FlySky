@@ -5,7 +5,7 @@ import grupo1.FlySky.Dto.Responses.UsuarioDto;
 import grupo1.FlySky.Entity.Roles;
 import grupo1.FlySky.Entity.Usuario;
 import grupo1.FlySky.Exceptions.DuplicateUserException;
-import grupo1.FlySky.Repository.IUserRepository;
+import grupo1.FlySky.Repository.interfaces.IUserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
