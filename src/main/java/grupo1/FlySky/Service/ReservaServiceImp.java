@@ -37,11 +37,11 @@ public class ReservaServiceImp implements IReservaService {
             throw new DuplicateReservaException("Reserva ya registrada");
         }
 
-        vueloService.modificarAsientos(reserva.getVueloID(), reserva.getCantAsientos());
+        this.vueloService.modificarAsientos(reserva.getVueloID(), reserva.getCantAsientos());
 
         //seteamos precio final
         //reservaEntity.setPrecioFinal(reservaEntity.getVueloID().getPrecio() * reservaEntity.getCantAsientos());
-        reserva.setPrecioFinal(vueloService.buscarPorDestino(reserva.getVueloID()).getPrecio() * reserva.getCantAsientos());
+        reserva.setPrecioFinal(this.vueloService.buscarPorDestino(reserva.getVueloID()).getPrecio() * reserva.getCantAsientos());
 
         Reserva reservaEntity = this.mapper.map(reserva, Reserva.class);
         Reserva reservaCreada = this.repository.save(reservaEntity);
