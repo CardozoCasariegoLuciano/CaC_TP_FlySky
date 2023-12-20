@@ -25,4 +25,8 @@ public class UserController {
     public ResponseEntity<?> crearUsuario(@RequestBody @Valid  CrearUsuarioDto body) {
         return new ResponseEntity<>(this.service.crearUsuario(body), HttpStatus.CREATED);
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerPorId(@PathVariable  Long id, @RequestParam Long usuarioId){
+        return new ResponseEntity<>(this.service.obtenerUsuarioReservas(id, usuarioId), HttpStatus.OK);
+    }
 }
