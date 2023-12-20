@@ -1,6 +1,7 @@
 package grupo1.FlySky.Controller;
 
 import grupo1.FlySky.Dto.Requests.CrearUsuarioDto;
+import grupo1.FlySky.Dto.Responses.ReservaPorUsuarioDto;
 import grupo1.FlySky.Dto.Responses.UsuarioDto;
 import grupo1.FlySky.Service.UserService;
 import org.junit.jupiter.api.Test;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {
@@ -51,4 +52,20 @@ public class UserControllerTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    void obtenerPorIdTest() {
+        Long id = 1L;
+        Long usuarioId = 2L;
+
+        ReservaPorUsuarioDto reservaPorUsuarioDto = mock(ReservaPorUsuarioDto.class);
+        when(service.obtenerUsuarioReservas(id,usuarioId)).thenReturn(reservaPorUsuarioDto);
+
+        ResponseEntity<?> respuesta = controller.obtenerPorId(id, usuarioId);
+
+        verify(service, times(1)).obtenerUsuarioReservas(id, usuarioId);
+
+        assertEquals(HttpStatus.OK, respuesta.getStatusCode());
+    }
+
 }
