@@ -4,6 +4,7 @@ package grupo1.FlySky.Service;
 import grupo1.FlySky.Dto.Responses.ResponseDTO;
 import grupo1.FlySky.Dto.VuelosDTO;
 import grupo1.FlySky.Entity.Vuelo;
+import grupo1.FlySky.Exceptions.AsientosExcedidosException;
 import grupo1.FlySky.Repository.interfaces.IVueloRepository;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
@@ -17,9 +18,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -79,6 +85,32 @@ public class VueloServiceTest {
         ResponseDTO responseDTO = service.guardarVuelo(vuelosDTO);
 
         assertEquals("No se pudo guardar Vuelo", responseDTO.getMensaje());
+    }
+
+    @Test
+    @Description("Se pasan los parametros correctos")
+    void modificarAsientos_ok() {
+        Vuelo vueloConCuposSuficientes = new Vuelo();
+        vueloConCuposSuficientes.setCuposLibres(15);
+        when(repository.findById(anyLong())).thenReturn(Optional.of(vueloConCuposSuficientes));
+
+        service.modificarAsientos(1L, 10);
+
+        verify(repository, times(1)).findById(1L);
+        verify(repository, times(1)).save(vueloConCuposSuficientes);
+    }
+
+    @Test
+    @Description("AsientosExcedidosException")
+    void modificarAsientos_AsientosExcedidosException() {
+        Vuelo vueloConCuposSuficientes = new Vuelo();
+        vueloConCuposSuficientes.setCuposLibres(5);
+
+        when(repository.findById(anyLong())).thenReturn(Optional.of(vueloConCuposSuficientes));
+
+        assertThrows(AsientosExcedidosException.class, () -> service.modificarAsientos(1L, 10));
+
+        verify(repository, times(1)).findById(1L);
     }
 
 }
