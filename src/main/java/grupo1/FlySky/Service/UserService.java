@@ -23,8 +23,9 @@ public class UserService implements IUserService {
     IUserRepository repository;
     ModelMapper maper = new ModelMapper();
 
-    public UserService(IUserRepository repository) {
+    public UserService(IUserRepository repository, ReservaServiceImp reservaService) {
         this.repository = repository;
+        this.reservaService = reservaService;
     }
 
     @Override
