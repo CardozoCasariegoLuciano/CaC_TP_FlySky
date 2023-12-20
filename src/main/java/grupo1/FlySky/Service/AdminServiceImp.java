@@ -57,8 +57,6 @@ public class AdminServiceImp implements IAdminService {
 
         int cantReservas = reservaService.reservaPorFecha(date).size();
 
-        //vuelo mas reservado??
-
         return new EstadisticasDTO(cantAsientos,asientosReservaMax,asientosReservaMaxId,asientosReservaMaxId,
                 reservaMasCara,cantReservas,sumaDiaria);
     }
