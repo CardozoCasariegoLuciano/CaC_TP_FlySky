@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,5 +51,16 @@ public class ReservaControllerTest {
         ResponseEntity<?> actual = controller.nuevaReserva(reserva);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void reservasPorUsuario() {
+        Long userId = 1L;
+        List<ReservaDto> reservaDtos = List.of(new ReservaDto());
+        when(service.reservasPorUsuario(userId)).thenReturn(reservaDtos);
+
+        ResponseEntity<?> respuesta = controller.reservasPorUsuario(userId);
+
+        assertEquals(HttpStatus.OK, respuesta.getStatusCode());
     }
 }
