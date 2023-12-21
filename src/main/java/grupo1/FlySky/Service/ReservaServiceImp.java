@@ -39,9 +39,9 @@ public class ReservaServiceImp implements IReservaService {
 
         this.vueloService.modificarAsientos(reserva.getVueloID(), reserva.getCantAsientos());
 
-        //seteamos precio final
-        //reservaEntity.setPrecioFinal(reservaEntity.getVueloID().getPrecio() * reservaEntity.getCantAsientos());
         reserva.setPrecioFinal(this.vueloService.buscarPorDestino(reserva.getVueloID()).getPrecio() * reserva.getCantAsientos());
+        //aca podemos agregar lo de la compra por menos direno o mas del punto que dice fernando
+
 
         Reserva reservaEntity = this.mapper.map(reserva, Reserva.class);
         Reserva reservaCreada = this.repository.save(reservaEntity);
@@ -58,6 +58,7 @@ public class ReservaServiceImp implements IReservaService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<ReservaDto> reservasPorUsuario (Long id_usuario){
         Usuario user = new Usuario();
         user.setId(id_usuario);
@@ -67,6 +68,8 @@ public class ReservaServiceImp implements IReservaService {
                 .map(reserva -> this.mapper.map(reserva, ReservaDto.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
     public List<ReservaDto> reservaPorFecha (LocalDate fecha) {
         List<Reserva> reservas = this.repository.findByFecha(fecha);
 

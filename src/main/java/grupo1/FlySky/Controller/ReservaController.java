@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 @RestController
 @RequestMapping("/reserve")
 public class ReservaController {
@@ -28,9 +30,13 @@ public class ReservaController {
         return new ResponseEntity<>(service.reservasPorUsuario(userId), HttpStatus.OK);
     }
 
+    @GetMapping("/{date}")
+    public ResponseEntity<?> reservaPorFecha(@PathVariable LocalDate date) {
+        return new ResponseEntity<>(service.reservaPorFecha(date), HttpStatus.OK);
+    }
+
     @PostMapping("/new")
     public ResponseEntity<?> nuevaReserva(@RequestBody @Valid ReservaSaveDto reserva) {
         return new ResponseEntity<>(service.nuevaReserva(reserva), HttpStatus.CREATED);
     }
-
 }

@@ -27,7 +27,6 @@ public class AdminServiceImp implements IAdminService {
     @Override
     public EstadisticasDTO dailyStatus(UsuarioDto usuario, LocalDate date) {
 
-        //aca deberiamos validar el usuario
         if (!usuario.getRol().equals(Roles.Rol.ADMINISTRADOR)) {
             throw new TipoDeUsuarioIncorrectoException("No tiene los privilegios suficientes");
         }
