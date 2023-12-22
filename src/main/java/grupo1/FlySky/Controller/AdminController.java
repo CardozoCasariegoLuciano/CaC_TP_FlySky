@@ -19,7 +19,7 @@ public class AdminController {
     }
 
     @GetMapping("/dailystatus/{date}")
-    public ResponseEntity<?> resumenDiario(@RequestBody UsuarioDto body, @PathVariable LocalDate date) {
+    public ResponseEntity<?> resumenDiario(@RequestBody UsuarioDto body,@PathVariable LocalDate date) {
         return new ResponseEntity<>(this.service.dailyStatus(body,date), HttpStatus.OK);
     }
 }
